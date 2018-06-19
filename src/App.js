@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Link, Route} from "react-router-dom";
-import {DownloadComponent} from "./downloadComponent";
+import {DownloadComponent} from "./components/downloadComponent";
 import Resources from "./components/Resources/Resources";
 
 class App extends Component {
