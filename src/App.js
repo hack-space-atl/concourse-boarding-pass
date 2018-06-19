@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {Link, Route} from "react-router-dom";
 import {DownloadComponent} from "./downloadComponent";
+import Resources from "./components/Resources/Resources";
 
 class App extends Component {
     render() {
@@ -19,6 +20,11 @@ class App extends Component {
                 </p>
                 <Link to='/download'/>
                 <Route path='/download' component={DownloadComponent}/>
+
+                <div>
+                    <Resources/>
+                </div>
+
             </div>
         );
     }
