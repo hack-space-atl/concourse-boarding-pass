@@ -1,0 +1,18 @@
+.resources {
+    padding: 15%;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.section-header {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.text-label {
+    word-wrap: break-spaces;
+}
+
+.block {
+    display: inline-flex;
+}

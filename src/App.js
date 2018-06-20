@@ -21,10 +21,11 @@ class App extends Component {
                 <Link to='/download'/>
                 <Route path='/download' component={DownloadComponent}/>
 
-                <div>
-                    <Resources/>
+                <div className="sections">
+                    <div className="section-left"><Resources/></div>
+                    <div className="section-mid"><Resources/></div>
+                    <div className="section-right"><Resources/></div>
                 </div>
-
             </div>
         );
     }
