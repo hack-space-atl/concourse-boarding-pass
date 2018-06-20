@@ -9,10 +9,18 @@
     font-size: 20px;
 }
 
+.block {
+    display: flex;
+    justify-items: flex-start;
+    margin-top: 20px;
+    text-align: left;
+}
+
 .text-label {
+    flex-basis: 125px;
     word-wrap: break-spaces;
 }
 
-.block {
-    display: inline-flex;
+.dropdown {
+
 }

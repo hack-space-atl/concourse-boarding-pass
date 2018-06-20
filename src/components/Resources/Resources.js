@@ -16,7 +16,7 @@ class Resources extends Component {
 
                 <div className="block">
                     <div className="text-label">What framework are you using?</div>
-                    <DropdownButton
+                    <DropdownButton className="dropdown"
                         title="Choose a tech stack"
                         id="dropdown-basic-1">
                         <MenuItem eventKey="1">Framework 1</MenuItem>
@@ -37,7 +37,9 @@ class Resources extends Component {
                     </DropdownButton>
                 </div>
 
-                <div>Test</div>
+                <div>That is all we need for basic pipelines. But if you need a more advanced setup, check out our Advanced Options.</div>
+
+                <div>Advanced Options</div>
 
             </div>
         );
