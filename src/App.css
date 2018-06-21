@@ -11,7 +11,7 @@
 
 .App-header {
   background-color: #3398DC;
-  height: 100px;
+  height: 150px;
   padding: 20px;
   color: white;
 }
@@ -29,7 +29,19 @@
 }
 
 .App-intro {
+  margin-top: 2%;
   font-size: large;
+  margin-bottom: 2%;
+}
+
+.section-mid {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.sections {
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes App-logo-spin {

@@ -15,9 +15,11 @@ class App extends Component {
                     </div>
                     <div>Concourse CI Pipeline Generator</div>
                 </header>
+
                 <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
+                    Cool beans. Complete the steps below to help us create a pipeline.yml download specific for you.
                 </p>
+
                 <Link to='/download'/>
                 <Route path='/download' component={DownloadComponent}/>
 
