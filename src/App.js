@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Link, Route} from "react-router-dom";
-import {DownloadComponent} from "./components/downloadComponent";
+import Main from "./components/Main";
 
 class App extends Component {
     render() {
@@ -14,11 +13,7 @@ class App extends Component {
                     </div>
                     <div>Concourse CI Pipeline Generator</div>
                 </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
-                <Link to='/download'/>
-                <Route path='/download' component={DownloadComponent}/>
+                <Main />
             </div>
         );
     }

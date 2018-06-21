@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {YamlService} from "../services/yamlGenerator";
 import fileDownload from 'react-file-download';
+import {Link} from "react-router-dom";
 
 export class DownloadComponent extends Component {
 
@@ -39,7 +40,7 @@ export class DownloadComponent extends Component {
 
     handleClick = () => {
         const yamlData = YamlService.toYaml(this.dummyData);
-        console.log("clicked ", yamlData);
+        console.log("clicked ", yamlData.toString());
         this.setState({
             data: yamlData
         });
@@ -50,11 +51,11 @@ export class DownloadComponent extends Component {
 
         return (
             <div className="downloadComponent">
-                <p>Hello</p>
                 <button onClick={this.handleClick}>Download</button>
                 <div>
                     {this.state.data}
                 </div>
+                <Link to='jobs'>Jobs</Link>
             </div>
         )
     };
