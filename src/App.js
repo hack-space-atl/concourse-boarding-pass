@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import Main from "./components/Main";
+import {Link, Route} from "react-router-dom";
+import {DownloadComponent} from "./components/downloadComponent";
+import Resources from "./components/Resources/Resources";
 
 class App extends Component {
     render() {
