@@ -1,18 +1,20 @@
 import React from "react";
-import {Link, Route, Switch} from "react-router-dom";
-import {DownloadComponent} from "./downloadComponent";
-import {JobsComponent} from "./Jobs/Jobs";
+import {Route, Switch} from "react-router-dom";
+import QuestionComponent from "./Question/Question";
+import InstallComponent from "./Installation/Install";
+import ConfigurationComponent from "./Configuration/ConfigurationComponent";
+import {withRouter} from "react-router";
 
 const Main = () => {
     return (
         <main>
             <Switch>
-                <Route path='/download' component={DownloadComponent}/>
-                <Route path='/jobs' component={JobsComponent} />
+                <Route exact path='/' component={QuestionComponent} />
+                <Route path='/install' component={InstallComponent} />
+                <Route path='/configure' component={ConfigurationComponent} />
             </Switch>
-            <Link to='/download'>Downloads</Link>
         </main>
     )
 };
 
-export default Main;
+export default withRouter(Main);

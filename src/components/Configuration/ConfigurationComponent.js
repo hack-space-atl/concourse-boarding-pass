@@ -1,15 +1,13 @@
-import React, {Component} from 'react';
-import {YamlService} from "../services/yamlGenerator";
-import fileDownload from 'react-file-download';
+import React, { Component } from 'react';
+import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
+import fileDownload from "react-file-download";
+import {YamlService} from "../../services/yamlGenerator";
 
-export class DownloadComponent extends Component {
+class ConfigurationComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            data: 'default'
-        };
         this.dummyData = {
             "id": "0001",
             "type": "donut",
@@ -48,15 +46,15 @@ export class DownloadComponent extends Component {
     };
 
     render() {
-
         return (
-            <div className="downloadComponent">
-                <button onClick={this.handleClick}>Download</button>
+            <div className="configuration">
+                <p>Configuration</p>
                 <div>
-                    {this.state.data}
+                    <button onClick={this.handleClick}>Download</button>
                 </div>
-                <Link to='jobs'>Jobs</Link>
+                <Link to='/'>Back</Link>
             </div>
         )
-    };
+    }
 }
+export default withRouter(ConfigurationComponent)

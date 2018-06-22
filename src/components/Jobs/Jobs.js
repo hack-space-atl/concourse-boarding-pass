@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 
 export class JobsComponent extends Component {
@@ -7,7 +8,10 @@ export class JobsComponent extends Component {
     }
     render() {
         return (
-            <div>Jobs</div>
+            <div className="jobs">
+                <p>Jobs</p>
+                <Link to='/'>Back</Link>
+            </div>
         )
     }
 }
