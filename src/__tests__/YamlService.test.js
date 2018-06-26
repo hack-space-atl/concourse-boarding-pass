@@ -1,8 +1,8 @@
-import {YamlService} from "../services/yamlGenerator";
+import {YamlService} from "../services/YamlService";
 
 describe("yaml generator test", () => {
 
-    let yaml = null;
+    let yaml;
 
     beforeEach(() => {
         yaml = new YamlService();
@@ -10,6 +10,6 @@ describe("yaml generator test", () => {
 
     it("should correctly handle null json input", async () => {
         const yamlData = yaml.toYaml();
-        expect(yamlData).toBeNull()
+        expect(yamlData).toBeNull();
     });
 });
