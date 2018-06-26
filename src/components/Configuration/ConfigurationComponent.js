@@ -3,6 +3,7 @@ import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
 import {YamlService} from "../../services/YamlService";
 import Resources from "../Resources/Resources";
+import Jobs from "../Jobs/Jobs";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/styles/hljs';
 import './ConfigurationComponent.css';
@@ -59,6 +60,7 @@ class ConfigurationComponent extends Component {
                     <div className="section-mid">
 
                         <Resources/>
+
 
                     </div>
 
