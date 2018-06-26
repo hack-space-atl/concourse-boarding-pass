@@ -51,9 +51,20 @@ class ConfigurationComponent extends Component {
         return (
             <div className="configuration">
                 <h2 className="title">Configuration</h2>
-                <div className="container">
-                    <Resources/>
-                    <div className="codeViewer">
+
+                <div className="sections">
+
+                    <div className="section-left"><Resources/></div>
+
+                    <div className="section-mid">
+
+                        <Resources/>
+
+                    </div>
+
+                    <div className="section-right">
+
+                        <div className="codeViewer">
                             <SyntaxHighlighter language='yaml'
                                                style={docco.default}
                                                showLineNumbers={true}
@@ -62,6 +73,9 @@ class ConfigurationComponent extends Component {
                             <div>
                                 <button onClick={this.handleClick}>Download</button>
                             </div>
+                        </div>
+
+
                     </div>
                 </div>
 
