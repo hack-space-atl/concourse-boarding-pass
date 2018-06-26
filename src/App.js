@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Main from "./components/Main";
+import {withRouter} from "react-router";
 
 class App extends Component {
     render() {
@@ -11,7 +12,7 @@ class App extends Component {
                         <img src="/images/logo-white.svg" className="App-logo" alt="logo"/>
                         <h1 className="App-title">Concourse Boarding Pass</h1>
                     </div>
-                    <div>Concourse CI Pipeline Generator</div>
+                    <div className="App-intro">Concourse CI Pipeline Generator</div>
                 </header>
                 <Main />
             </div>
@@ -19,4 +20,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);
