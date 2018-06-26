@@ -6,6 +6,7 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-smoothie": "^0.3.2",
+    "jasmine": "^3.1.0",
     "mocha": "^5.2.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -19,7 +20,8 @@
     "build": "react-scripts build",
     "postinstall": "./node_modules/protractor/bin/webdriver-manager update --versions.chrome=2.36",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e": "protractor protractor.conf.js"
   },
   "devDependencies": {
     "protractor": "^5.3.2"
