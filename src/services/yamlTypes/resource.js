@@ -1,14 +1,5 @@
 import yaml from 'js-yaml';
 
-// resources:
-//     - name: resource-tutorial
-// type: git
-// source:
-//     uri: https://github.com/starkandwayne/concourse-tutorial.git
-//         branch: develop
-
-
-
 export const Source = (uri, branch) => {
     this.uri = uri;
     this.branch = branch;

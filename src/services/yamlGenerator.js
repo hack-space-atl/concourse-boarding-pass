@@ -1,5 +1,6 @@
 import yaml from "js-yaml";
 import {PIPELINE_SCEHMA} from "./yamlTypes/pipeline";
+import {RESOURCE_SCHEMA} from "./yamlTypes/resource";
 
 export class YamlService {
 
@@ -28,5 +29,14 @@ export class YamlService {
             this.jsonData.resources = [data]
         }
         return this.jsonData;
+    }
+
+    parseResource(data) {
+        try {
+            return yaml.safeDump(data, {
+                schema: RESOURCE_SCHEMA
+            });
+        }
+        return null;
     }
 }

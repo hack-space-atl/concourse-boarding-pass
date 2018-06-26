@@ -1,0 +1,5 @@
+- name: boarding-pass
+  type: git
+  source:
+    uri: 'https://github.com/hack-space-atl/concourse-boarding-pass.git'
+    branch: master

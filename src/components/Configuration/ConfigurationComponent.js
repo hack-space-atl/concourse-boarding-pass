@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {YamlService} from "../../services/yamlGenerator";
 import Resources from "../Resources/Resources";
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/styles/hljs';
+import {docco} from 'react-syntax-highlighter/styles/hljs';
 import './ConfigurationComponent.css';
 
 class ConfigurationComponent extends Component {
@@ -41,8 +41,6 @@ class ConfigurationComponent extends Component {
         this.setState({
             generatedYaml: parsed
         });
-        // const blob = new Blob([parsed], {type: 'text/plain;charset=utf-8'});
-        // saveAs(blob, 'pipeline.yml');
     };
 
 
@@ -54,14 +52,14 @@ class ConfigurationComponent extends Component {
                 <div className="container">
                     <Resources/>
                     <div className="codeViewer">
-                            <SyntaxHighlighter language='yaml'
-                                               style={docco.default}
-                                               showLineNumbers={true}
-                                               customStyle={{display: 'block'}}
-                                               wrapLines={true}>{this.state.generatedYaml}</SyntaxHighlighter>
-                            <div>
-                                <button onClick={this.handleClick}>Download</button>
-                            </div>
+                        <SyntaxHighlighter language='yaml'
+                                           style={docco.default}
+                                           showLineNumbers={true}
+                                           customStyle={{display: 'block'}}
+                                           wrapLines={true}>{this.state.generatedYaml}</SyntaxHighlighter>
+                        <div>
+                            <button onClick={this.handleClick}>Download</button>
+                        </div>
                     </div>
                 </div>
 
