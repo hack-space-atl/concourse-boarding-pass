@@ -1,5 +1,11 @@
-- name: boarding-pass
-  type: git
-  source:
-    uri: 'https://github.com/hack-space-atl/concourse-boarding-pass.git'
-    branch: master
+resources:
+  - name: boarding-pass
+    type: git
+    source:
+      uri: 'https://github.com/hack-space-atl/concourse-boarding-pass.git'
+      branch: master
+  - name: um whatName
+    type: some type
+    source:
+      uri: google.com
+      branch: develop

@@ -13,6 +13,7 @@ export const Pipeline = (resources) => {
 export const PipelineYamlType = new yaml.Type('!pipeline', {
     kind: 'mapping',
     construct: (data) => {
+        console.log("data in PipelineYamlType", data);
         return new Pipeline(data.resources);
     },
     instanceOf: Pipeline

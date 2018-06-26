@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from "react-router";
 import {Link} from "react-router-dom";
-import {YamlService} from "../../services/yamlGenerator";
+import {YamlService} from "../../services/YamlService";
 import Resources from "../Resources/Resources";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {docco} from 'react-syntax-highlighter/styles/hljs';
