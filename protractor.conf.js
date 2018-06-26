@@ -3,6 +3,6 @@ exports.config = {
     capabilities: {
         browserName: 'chrome'
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3006',
     framework: 'jasmine'
 };

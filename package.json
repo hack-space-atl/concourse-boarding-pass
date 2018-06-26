@@ -2,6 +2,16 @@
   "name": "concourse-boarding-pass",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postinstall": "./node_modules/protractor/bin/webdriver-manager update --versions.chrome=2.36",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "pre-e2e": "PORT=3006 react-scripts start &",
+    "e2e": "protractor protractor.conf.js",
+    "post-e2e": "pkill -f concourse-boarding-pass"
+  },
   "dependencies": {
     "blob": "^0.0.4",
     "chai": "^4.1.2",
@@ -21,14 +31,6 @@
     "sinon": "^6.0.0",
     "yamljs": "^0.3.0",
     "yarn": "^1.7.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postinstall": "./node_modules/protractor/bin/webdriver-manager update --versions.chrome=2.36",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "e2e": "protractor protractor.conf.js"
   },
   "devDependencies": {
     "protractor": "^5.3.2"
