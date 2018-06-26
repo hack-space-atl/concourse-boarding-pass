@@ -1,0 +1,50 @@
+.resources {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.section {
+    margin-bottom: 5%;
+}
+
+.section-header {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.block {
+    display: flex;
+    justify-items: flex-start;
+    margin-top: 8%;
+    text-align: left;
+}
+
+.text-label {
+    flex-basis: 125px;
+    word-wrap: break-spaces;
+    text-align: start;
+}
+
+.dropdown {
+
+}
+
+.repoText {
+    padding-left: 2.5%;
+    width: 175px;
+}
+
+.final-text {
+    margin-top: 10%;
+    text-align: start;
+}
+
+.advanced-options {
+    padding-bottom: 5%;
+    color: #3398DC;
+    font-weight: bold;
+    margin-top: 10%;
+}

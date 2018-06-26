@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    text-align: center;
+}
+
+.resources {
+    flex: 1;
+}
+.codeViewer {
+    flex: 1;
+}
+
+.section-mid {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.sections {
+    display: flex;
+    justify-content: center;
+}
