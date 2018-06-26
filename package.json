@@ -8,7 +8,7 @@
     "postinstall": "./node_modules/protractor/bin/webdriver-manager update --versions.chrome=2.36",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "pre-e2e": "PORT=3006 react-scripts start &",
+    "pre-e2e": "PORT=3006 BROWSER=none react-scripts start &",
     "e2e": "protractor protractor.conf.js",
     "post-e2e": "pkill -f concourse-boarding-pass"
   },
