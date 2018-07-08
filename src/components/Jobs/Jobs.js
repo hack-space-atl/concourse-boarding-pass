@@ -1,46 +1,61 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import './Jobs.css'
 
+import {  SplitButton, MenuItem} from "react-bootstrap";
 
 export default class Jobs extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div className="jobs">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossOrigin="anonymous">
                 </link>
                 <div className="section-header">Jobs</div>
-                    <div>Let's start our with 3 default jobs,but feel free to add or remove any!</div>
+                <div>Let's start our with 3 default jobs,but feel free to add or remove any!</div>
                 <div>
-                    <p>1. Building Source Code</p>
-                    <p>Remove Job</p>
-                </div>
-                <p>Actions:</p>
-
-                <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Actions</a>
-                <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">three</a></li>
-                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                </ul>
-                <p>Choose an</p>
-                <p>+ Add Action</p>
-                <div>
-                    <p>2. Run Unit Test X Remove</p>
-                    <p>Actions: Choose an action</p>
-                    <p>+ Add Action</p>
+                  <div className="block">
+                      <div>1. Building Source Code</div>
+                      <span className="remove-job">X Remove Job</span>
+                  </div>
+                  <p>Actions:</p>
+                  <SplitButton title="Choose an Action" pullRight id="split-button-pull-right">
+                    <MenuItem eventKey="1">Source1</MenuItem>
+                    <MenuItem eventKey="2">Source2</MenuItem>
+                    <MenuItem eventKey="3">Source3</MenuItem>
+                    <MenuItem divider />
+                    <MenuItem eventKey="4">Separated link</MenuItem>
+                  </SplitButton>
+                  <div className="add-action">+ Add Action</div>
                 </div>
                 <div>
-                    <p>Deploy  x Remove</p>
-                    <p>Actions: Choose an action</p>
-                    <p>+ Add Action</p>
+                    <div className="block">
+                        <div>2. Run Unit Test</div>
+                        <span className="remove-job">X Remove Job</span>
+                    </div>
+                    <SplitButton title="Choose an Action" pullRight id="split-button-pull-right">
+                      <MenuItem eventKey="1">Source1</MenuItem>
+                      <MenuItem eventKey="2">Source2</MenuItem>
+                      <MenuItem eventKey="3">Source3</MenuItem>
+                      <MenuItem divider />
+                      <MenuItem eventKey="4">Separated link</MenuItem>
+                    </SplitButton>
+                                    <div className="add-action">+ Add Action</div>
                 </div>
-                <Link to='/'>Add Job</Link>
+                <div>
+                    <div className="block">
+                        <div>3. Deploy  </div>
+                        <span className="remove-job">X Remove Job</span>
+                    </div>
+                    <SplitButton title="Choose an Action" pullRight id="split-button-pull-right">
+                      <MenuItem eventKey="1">Source1</MenuItem>
+                      <MenuItem eventKey="2">Source2</MenuItem>
+                      <MenuItem eventKey="3">Source3</MenuItem>
+                      <MenuItem divider />
+                      <MenuItem eventKey="4">Separated link</MenuItem>
+                    </SplitButton>
+                <div className="add-action">+ Add Action</div>
+                </div>
+                <Link to='/' className="add-job">Add Job</Link>
 
 >>>>>>> dropdown
             </div>

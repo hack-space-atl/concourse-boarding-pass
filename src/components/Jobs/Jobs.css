@@ -1,7 +1,8 @@
 .jobs {
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 35% important;
+    margin: auto;
     display: inline-flex;
     flex-direction: column;
 }
@@ -10,7 +11,7 @@
     margin-bottom: 5%;
 }
 
-.job-header {
+.section-header {
     font-weight: bold;
     font-size: 20px;
 }
@@ -22,6 +23,19 @@
     text-align: left;
 }
 
+.remove-job {
+    display: flex;
+    justify-content: right;
+    color: #ff0000;
+}
+
+.add-action {
+    color: blue;
+}
+.add-job {
+  padding-top: 10%;
+  font-weight: bold;
+}
 .text-label {
     flex-basis: 125px;
     word-wrap: break-spaces;
