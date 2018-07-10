@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 import './App.css';
 import Main from "./components/Main";
 import {withRouter} from "react-router";
+import {YamlService} from "./services/YamlService";
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.yamlGen = new YamlService();
+    }
     render() {
         return (
             <div className="App">
@@ -14,7 +20,7 @@ class App extends Component {
                     </div>
                     <div className="App-intro">Concourse CI Pipeline Generator</div>
                 </header>
-                <Main />
+                <Main yamlService={this.yamlGen} />
             </div>
         );
     }

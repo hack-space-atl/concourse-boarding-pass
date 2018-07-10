@@ -41,6 +41,10 @@ export class YamlService {
         return this.pipeline;
     }
 
+    clearPipeline() {
+        this.pipeline = {};
+    }
+
     static test(data) {
         return yaml.safeDump(data, {
             schema: JOB_SCHEMA,
