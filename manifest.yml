@@ -1,0 +1,4 @@
+applications:
+- name: concourse-boarding-pass
+  command: npm start
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
