@@ -10,6 +10,8 @@ export class JobsComponent extends Component {
         return (
             <div className="jobs">
                 <p>Jobs</p>
+                <p>Let's start out with 3 default jobs,</p>
+                <p>but feel free to add or remove any!</p>
                 <Link to='/'>Back</Link>
             </div>
         )

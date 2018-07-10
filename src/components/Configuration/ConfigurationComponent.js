@@ -51,24 +51,14 @@ class ConfigurationComponent extends Component {
         // console.log(jsonData);
         const step = {
             name: "some job name",
+            public: true,
             plan: [
                 {
-                    get: "my Repo",
-                    trigger: true,
-                    passed: ["something"]
+                    get: "my Repo"
                 },
                 {
-                    put: 'some put',
-                    resource: "some resourse",
-                    params: {repository: 'some-repo'}
-                },
-                {
-                    aggregate: [
-                        {
-                            task: 'a task name',
-                            file: 'some file'
-                        }
-                    ]
+                    task: "hello-world",
+                    file: "resource-tutorial/tutorials/basic/task-hello-world/task_hello_world.yml"
                 }
             ]
         };
@@ -87,17 +77,31 @@ class ConfigurationComponent extends Component {
         return (
             <div className="configuration">
                 <h2 className="title">Configuration</h2>
-                <div className="container">
-                    <Resources/>
-                    <div className="codeViewer">
-                        <SyntaxHighlighter language='yaml'
-                                           style={docco.default}
-                                           showLineNumbers={true}
-                                           customStyle={{display: 'block'}}
-                                           wrapLines={true}>{this.state.generatedYaml}</SyntaxHighlighter>
-                        <div>
-                            <button onClick={this.handleClick}>Download</button>
+
+                <div className="sections">
+
+                    <div className="section-left"><Resources/></div>
+
+                    <div className="section-mid">
+
+                        <Resources/>
+
+                    </div>
+
+                    <div className="section-right">
+
+                        <div className="codeViewer">
+                            <SyntaxHighlighter language='yaml'
+                                               style={docco.default}
+                                               showLineNumbers={true}
+                                               customStyle={{display: 'block'}}
+                                               wrapLines={true}>{this.state.generatedYaml}</SyntaxHighlighter>
+                            <div>
+                                <button onClick={this.handleClick}>Download</button>
+                            </div>
                         </div>
+
+
                     </div>
                 </div>
 

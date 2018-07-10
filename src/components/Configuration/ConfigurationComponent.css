@@ -13,3 +13,13 @@
 .codeViewer {
     flex: 4;
 }
+
+.section-mid {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.sections {
+    display: flex;
+    justify-content: center;
+}

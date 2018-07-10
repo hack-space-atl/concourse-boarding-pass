@@ -1,0 +1,39 @@
+.install {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 16pt;
+}
+
+.package-download-link {
+    padding: 2%;
+    color: #3398DC;
+    margin: 0;
+}
+
+ul.dashed {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.dashed > li {
+    margin-left: 15px;  
+}
+
+ul.dashed > li::before {
+    content: "-";
+    margin-left: -15px;
+}
+
+.installed-concourse {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
