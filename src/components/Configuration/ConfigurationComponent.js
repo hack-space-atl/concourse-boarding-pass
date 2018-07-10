@@ -57,12 +57,7 @@ class ConfigurationComponent extends Component {
 
                     <div className="section-left"><Resources/></div>
 
-                    <div className="section-mid">
-
-                        <Resources/>
-
-
-                    </div>
+                    <div className="section-mid"><Jobs /></div>
 
                     <div className="section-right">
 

@@ -2,9 +2,30 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import './Jobs.css'
 
-import {  SplitButton, MenuItem} from "react-bootstrap";
+import {  DropdownButton, SplitButton, MenuItem} from "react-bootstrap";
 
 export default class Jobs extends Component {
+  jobsArray = [
+            {
+                name: "Java",
+                value: "0"
+            },
+            {
+                name: "Javascript",
+                value: "1"
+            }
+        ];
+    sourceCodeArray = [
+              {
+                  name: "github",
+                  value: "0"
+              },
+              {
+                  name: "bitbucket",
+                  value: "1"
+              }
+          ];
+
     render() {
         return (
             <div className="jobs">
@@ -16,48 +37,42 @@ export default class Jobs extends Component {
                   <div className="block">
                       <div>1. Building Source Code</div>
                       <span className="remove-job">X Remove Job</span>
-                  </div>
-                  <p>Actions:</p>
-                  <SplitButton title="Choose an Action" pullRight id="split-button-pull-right">
-                    <MenuItem eventKey="1">Source1</MenuItem>
-                    <MenuItem eventKey="2">Source2</MenuItem>
-                    <MenuItem eventKey="3">Source3</MenuItem>
-                    <MenuItem divider />
-                    <MenuItem eventKey="4">Separated link</MenuItem>
-                  </SplitButton>
-                  <div className="add-action">+ Add Action</div>
+                   <div className="text-label">Actions</div>
+                   <DropdownButton id="dropdown-type"
+                                   className="dropdown"
+                                   title="source code">
+                       {this.sourceCodeArray.map(item =>
+                           <MenuItem eventKey={item.value}>{item.name}</MenuItem>)}
+                   </DropdownButton>
+                 </div>
+               </div>
+               <div>
+                 <div className="block">
+                     <div>2. Run Unit Test</div>
+                     <span className="remove-job">X Remove Job</span>
+                 </div>
+                  <div className="text-label">Actions</div>
+                  <DropdownButton id="dropdown-type"
+                                  className="dropdown"
+                                  title="remove job">
+                      {this.sourceCodeArray.map(item =>
+                          <MenuItem eventKey={item.value}>{item.name}</MenuItem>)}
+                  </DropdownButton>
+              </div>
+              <div>
+                <div className="block">
+                    <div>3. Deploy</div>
+                    <span className="remove-job">X Remove Job</span>
                 </div>
-                <div>
-                    <div className="block">
-                        <div>2. Run Unit Test</div>
-                        <span className="remove-job">X Remove Job</span>
-                    </div>
-                    <SplitButton title="Choose an Action" pullRight id="split-button-pull-right">
-                      <MenuItem eventKey="1">Source1</MenuItem>
-                      <MenuItem eventKey="2">Source2</MenuItem>
-                      <MenuItem eventKey="3">Source3</MenuItem>
-                      <MenuItem divider />
-                      <MenuItem eventKey="4">Separated link</MenuItem>
-                    </SplitButton>
-                                    <div className="add-action">+ Add Action</div>
-                </div>
-                <div>
-                    <div className="block">
-                        <div>3. Deploy  </div>
-                        <span className="remove-job">X Remove Job</span>
-                    </div>
-                    <SplitButton title="Choose an Action" pullRight id="split-button-pull-right">
-                      <MenuItem eventKey="1">Source1</MenuItem>
-                      <MenuItem eventKey="2">Source2</MenuItem>
-                      <MenuItem eventKey="3">Source3</MenuItem>
-                      <MenuItem divider />
-                      <MenuItem eventKey="4">Separated link</MenuItem>
-                    </SplitButton>
-                <div className="add-action">+ Add Action</div>
-                </div>
+                 <div className="text-label">Actions</div>
+                 <DropdownButton id="dropdown-type"
+                                 className="dropdown"
+                                 title="deploy">
+                     {this.sourceCodeArray.map(item =>
+                         <MenuItem eventKey={item.value}>{item.name}</MenuItem>)}
+                 </DropdownButton>
+             </div>
                 <Link to='/' className="add-job">Add Job</Link>
-
->>>>>>> dropdown
             </div>
         )
     }
