@@ -1,5 +1,6 @@
 import yaml from 'js-yaml';
 import {Resource, ResourceYamlType, SourceYamlType} from './resource';
+import {StepYamlType} from "./jobs";
 
 export const Pipeline = (resources) => {
     if (resources) {
@@ -19,4 +20,4 @@ export const PipelineYamlType = new yaml.Type('!pipeline', {
     instanceOf: Pipeline
 });
 
-export const PIPELINE_SCEHMA = yaml.Schema.create([PipelineYamlType, ResourceYamlType, SourceYamlType]);
+export const PIPELINE_SCEHMA = yaml.Schema.create([PipelineYamlType, ResourceYamlType, SourceYamlType, StepYamlType]);

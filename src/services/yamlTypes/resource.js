@@ -1,8 +1,25 @@
 import yaml from 'js-yaml';
 
-export const Source = (uri, branch) => {
+export const Team = (name, username = null, password = null) => {
+    this.name = name;
+    this.username = username;
+    this.password = password;
+};
+
+export const Source = (uri = null, branch = null, teams = null, target = null, insecure = null) => {
     this.uri = uri;
     this.branch = branch;
+
+    if (teams) {
+        if (!teams.every((team) => { return team instanceof Team; })) {
+            throw new Error('A non team inside teams Array');
+        } else {
+            this.teams = teams;
+        }
+    }
+    if (target) this.target = target;
+    if (insecure) this.insecure = insecure;
+
 };
 
 export const Resource = (name, type, source) => {

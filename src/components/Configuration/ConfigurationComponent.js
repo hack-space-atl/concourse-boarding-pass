@@ -31,13 +31,51 @@ class ConfigurationComponent extends Component {
             name: 'um whatName',
             type: 'some type',
             source: {
-                uri: "google.com",
-                branch: 'develop'
+                target: "https://somewebsite.com",
+                insecure: "true",
+                teams: [
+                    {
+                        name: "teamName1",
+                        username: 'hello',
+                        password: 'somepass'
+                    },
+                    {
+                        name: "teamName2",
+                        username: 'something',
+                        password: 'another pass'
+                    }
+                ]
             }
         };
         jsonData = this.yamlGen.createResource(moreData);
-        console.log(jsonData);
+        // console.log(jsonData);
+        const step = {
+            name: "some job name",
+            plan: [
+                {
+                    get: "my Repo",
+                    trigger: true,
+                    passed: ["something"]
+                },
+                {
+                    put: 'some put',
+                    resource: "some resourse",
+                    params: {repository: 'some-repo'}
+                },
+                {
+                    aggregate: [
+                        {
+                            task: 'a task name',
+                            file: 'some file'
+                        }
+                    ]
+                }
+            ]
+        };
+        this.yamlGen.createJob(step);
         const parsed = this.yamlGen.toYaml();
+        // const parsed = YamlService.test({plan: [step]});
+
         this.setState({
             generatedYaml: parsed
         });

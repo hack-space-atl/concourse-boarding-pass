@@ -1,5 +1,6 @@
 import yaml from "js-yaml";
 import {PIPELINE_SCEHMA} from "./yamlTypes/pipeline";
+import {JOB_SCHEMA} from "./yamlTypes/jobs";
 
 export class YamlService {
 
@@ -29,5 +30,21 @@ export class YamlService {
             this.pipeline.resources = [data]
         }
         return this.pipeline;
+    }
+
+    createJob(data) {
+        if (this.pipeline.jobs && Array.isArray(this.pipeline.jobs)) {
+            this.pipeline.jobs.push(data);
+        } else {
+            this.pipeline.jobs = [data]
+        }
+        return this.pipeline;
+    }
+
+    static test(data) {
+        return yaml.safeDump(data, {
+            schema: JOB_SCHEMA,
+            noRefs: true
+        });
     }
 }
