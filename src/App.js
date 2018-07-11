@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
 import Main from "./components/Main";
+import { withStyles } from '@material-ui/core/styles';
 import {withRouter} from "react-router";
 import {YamlService} from "./services/YamlService";
+import { AppBar, Typography } from '@material-ui/core';
+
+const styles = {
+    root: {
+      width: '100%',
+    }
+  };
 
 class App extends Component {
 
@@ -11,19 +19,21 @@ class App extends Component {
         this.yamlGen = new YamlService();
     }
     render() {
+
+        const { classes } = this.props;
         return (
-            <div className="App">
-                <header className="App-header">
+            <div className={classes.root}>
+                <AppBar className="App-header" color='primary' position='static'>
                     <div className="title">
                         <img src="/images/logo-white.svg" className="App-logo" alt="logo"/>
-                        <h1 className="App-title">Concourse Boarding Pass</h1>
+                        <Typography variant="display4">Concourse Boarding Pass</Typography>
                     </div>
-                    <div className="App-intro">Concourse CI Pipeline Generator</div>
-                </header>
+                    <Typography variant="subheading" gutterBottom>Concourse CI Pipeline Generator</Typography>
+                </AppBar>
                 <Main yamlService={this.yamlGen} />
             </div>
         );
     }
 }
 
-export default withRouter(App);
+export default withRouter(withStyles(styles)(App));

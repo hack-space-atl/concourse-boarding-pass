@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Question.css'
 import {withRouter} from "react-router";
+import { Button, Typography } from '@material-ui/core';
 
 class QuestionComponent extends Component {
     constructor(props) {
@@ -9,14 +10,14 @@ class QuestionComponent extends Component {
     render() {
         return (
             <div className="questionDiv">
-                <p>Have you installed Concourse yet?</p>
+                <Typography variant='title' align='center'>Have you installed Concourse yet?</Typography>
                 <div className="buttonContainer">
-                    <button className="buttons" onClick={() => {
+                    <Button variant='contained' color='primary' className="buttons" onClick={() => {
                         this.props.history.push('/configure');
-                    }}>Yup!</button>
-                    <button className="buttons" onClick={() => {
+                    }}>Yup!</Button>
+                    <Button variant='contained' color='secondary' className="buttons" onClick={() => {
                         this.props.history.push('/install');
-                    }}>Not yet...</button>
+                    }}>Not yet...</Button>
                 </div>
             </div>
         )
