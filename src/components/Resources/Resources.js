@@ -1,21 +1,49 @@
 import React, {Component} from "react";
 import './Resources.css';
-import {DropdownButton, MenuItem} from "react-bootstrap";
+import update from 'immutability-helper';
 
 class Resources extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            resources: []
-        }
+            resources: [],
+            numResources: 1
+        };
     }
 
     addResource() {
 
     }
 
+    inputChange(e) {
+        console.log(e.target.value);
+        console.log(e.target.id);
+        console.log(e.target.className);
+    }
+
     render() {
+        let resourceItems = [];
+        for(let i = 0; i < this.state.numResources; i++) {
+            resourceItems.push(
+                <div className={`resource`} key={i}>
+                    <div className="block">
+                        <div className="text-label">Repo URL</div>
+                        <input className="repoText" id={i} type="text"
+                               placeholder="Repo URL" onChange={this.inputChange}>
+                        </input>
+                    </div>
+
+                    <div className="block">
+                        <div className="text-label">Which branch?</div>
+                        <input className="branchText" id={i} type="text"
+                               placeholder="Branch" onChange={this.inputChange}>
+                        </input>
+                    </div>
+                </div>
+            )
+        }
+
         return (
             <div className="resources">
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -28,24 +56,15 @@ class Resources extends Component {
                     <div className="">Placeholder text</div>
                 </div>
 
-                <div className="resourceSection">
-                    <div className="block">
-                        <div className="text-label">Repo URL</div>
-                        <input className="repoText" type="text"
-                               placeholder="Repo URL">
-                        </input>
-                    </div>
 
-                    <div className="block">
-                        <div className="text-label">Which branch?</div>
-                        <input className="branchText" type="text"
-                               placeholder="Branch">
-                        </input>
-                    </div>
+                <div className="resourceSection">
+                    {resourceItems}
                 </div>
 
                 <br/>
-                <button onClick={this.addResource()}>Add Resource</button>
+                <button onClick={() => {
+                    this.setState({numResources: this.state.numResources + 1});
+                }}>Add Resource</button>
                 <br/>
                 <br/>
                 <div className="advanced-options">Advanced Options</div>
