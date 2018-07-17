@@ -10,6 +10,8 @@ class Resources extends Component {
             resources: [],
             numResources: 1
         };
+
+        this.inputChange = this.inputChange.bind(this);
     }
 
     addResource() {
@@ -20,11 +22,30 @@ class Resources extends Component {
         console.log(e.target.value);
         console.log(e.target.id);
         console.log(e.target.className);
+        console.log(this.state);
+
+        let resource = this.state.resources[e.target.id] || {};
+
+        if (e.target.className === "repoText") {
+            resource.uri = e.target.value
+        }
+        if (e.target.className === "branchText") {
+            resource.branch = e.target.value
+        }
+
+        const newResources = update(this.state.resources, {
+            [e.target.id]: { $set: resource }
+        });
+
+        this.setState({
+            resources: newResources
+        });
+        console.log(this.state.resources);
     }
 
     render() {
         let resourceItems = [];
-        for(let i = 0; i < this.state.numResources; i++) {
+        for (let i = 0; i < this.state.numResources; i++) {
             resourceItems.push(
                 <div className={`resource`} key={i}>
                     <div className="block">
@@ -64,7 +85,8 @@ class Resources extends Component {
                 <br/>
                 <button onClick={() => {
                     this.setState({numResources: this.state.numResources + 1});
-                }}>Add Resource</button>
+                }}>Add Resource
+                </button>
                 <br/>
                 <br/>
                 <div className="advanced-options">Advanced Options</div>
