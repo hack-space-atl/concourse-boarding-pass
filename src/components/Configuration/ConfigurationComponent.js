@@ -5,6 +5,7 @@ import Resources from "../Resources/Resources";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {docco} from 'react-syntax-highlighter/styles/hljs';
 import './ConfigurationComponent.css';
+import {JobsComponent} from "../Jobs/Jobs";
 
 class ConfigurationComponent extends Component {
 
@@ -83,7 +84,7 @@ class ConfigurationComponent extends Component {
 
                     <div className="section-mid">
 
-                        <Resources/>
+                        <JobsComponent/>
 
                     </div>
 
