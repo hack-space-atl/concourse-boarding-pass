@@ -5,7 +5,7 @@ import Resources from "../Resources/Resources";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {docco} from 'react-syntax-highlighter/styles/hljs';
 import './ConfigurationComponent.css';
-import {JobsComponent} from "../Jobs/Jobs";
+import {JobsComponent} from "../Jobs/JobsComponent";
 
 class ConfigurationComponent extends Component {
 
@@ -84,7 +84,7 @@ class ConfigurationComponent extends Component {
 
                     <div className="section-mid">
 
-                        <JobsComponent/>
+                        <JobsComponent yamlService={this.yamlGen}/>
 
                     </div>
 
