@@ -13,8 +13,11 @@ class ConfigurationComponent extends Component {
         super(props);
         this.yamlGen = this.props.yamlService;
         this.state = {
-            generatedYaml: `// Code`
-        }
+            generatedYaml: `// Code`,
+            pipeline: {}
+        };
+
+        this.resourceUpdated = this.resourceUpdated.bind(this);
     }
 
     handleClick = () => {
@@ -71,6 +74,9 @@ class ConfigurationComponent extends Component {
         });
     };
 
+    resourceUpdated = () => {};
+
+
 
     render() {
         console.log("rendering with state: ", this.state);
@@ -80,12 +86,8 @@ class ConfigurationComponent extends Component {
 
                 <div className="sections">
 
-                    <div className="section-left"><Resources/></div>
-
-                    <div className="section-mid">
-
-                        <JobsComponent/>
-
+                    <div className="section-left">
+                        <Resources yamlService={this.props.yamlGen} resourceUpdated={this.resourceUpdated}/>
                     </div>
 
                     <div className="section-right">
