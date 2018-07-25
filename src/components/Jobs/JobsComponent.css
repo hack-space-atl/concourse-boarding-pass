@@ -1,0 +1,9 @@
+.jobs {
+    margin-top: 20px;
+}
+
+.job {
+    border: 1px solid #f3f3f3;
+    padding: 4px;
+    margin-bottom: 10px;
+}
