@@ -30,4 +30,16 @@ describe('Concourse App', function () {
 
         expect(element(by.css('h2')).getText()).toEqual('Configuration');
     });
+
+
+    // a new start
+
+    fit('Successfully creates one or more resources', () => {
+        element(by.css('button:nth-child(1)')).click();
+
+        element(by.css('.resourceName')).sendKeys("resource-name");
+
+        // browser.sleep(10000);
+    });
+
 });

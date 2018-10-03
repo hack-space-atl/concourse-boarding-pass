@@ -36,7 +36,17 @@ class Resources extends Component {
         ];
 
         this.pipeline_template = {
-            'angular-unit-test': {
+            'java': {
+                resources: {
+                  source: {
+                      uri: "resource-uri"
+                  }
+                },
+                jobs: [{
+                    name: "java",
+                }]
+            },
+            'angular': {
                 resources: {
 
                     name: '{name-of-resource}',
@@ -91,20 +101,29 @@ class Resources extends Component {
         };
 
         this.inputChange = this.inputChange.bind(this);
+        this.frameworkSelect = this.frameworkSelect.bind(this);
     }
 
-    frameworkSelect = (item) => {
-        console.log(item.item.name);
+    frameworkSelect = (key) => {
+        const item = key.item;
+        const id = key.id;
 
-        let resourceTemplate = this.pipeline_template[item.item.name]
-        resourceTemplate.source.uri = this.state.jobs[item.id].uri
-        resourceTemplate.source.branch = this.state.jobs[item.id].branch
+        console.log(`state.jobs: `, this.state.jobs);
+
+        let resourceTemplate = this.pipeline_template[item.name];
+        resourceTemplate.resources.source.uri = this.state.jobs[id].uri;
+        resourceTemplate.resources.source.branch = this.state.jobs[id].branch;
+
+
 
         console.log(`template: ${resourceTemplate}`)
     };
 
     inputChange(e) {
-        let job = this.state.jobs[e.target.id] || {};
+        let id = e.target.id;
+        console.log(`target.id = `, id);
+
+        let job = this.state.jobs[id] || {};
 
         if (e.target.className === "repoText") {
             job.uri = e.target.value
@@ -114,12 +133,13 @@ class Resources extends Component {
         }
 
         const newResources = update(this.state.jobs, {
-            [e.target.id]: {$set: job}
+            [id]: {$set: job}
         });
 
         this.setState({
             jobs: newResources
         });
+
         console.log(this.state.jobs);
     }
 
@@ -180,6 +200,15 @@ class Resources extends Component {
                     <div className="">Placeholder text</div>
                 </div>
 
+
+                <div className="resourceSection">
+                    <div className="block">
+                        <div className="text-label">Repo URL</div>
+                        <input className="resourceName" id={i} type="text"
+                               placeholder="Repo URL" onChange={this.inputChange}>
+                        </input>
+                    </div>
+                <div/>
 
                 <div className="jobSection">
                     {jobItems}
