@@ -5,3 +5,7 @@
 .section-left, .section-mid, .section-right {
     flex: 1;
 }
+
+.configuration {
+    padding: 3% 10%;
+}

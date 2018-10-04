@@ -10,7 +10,7 @@
     "eject": "react-scripts eject",
     "pree2e": "PORT=3006 react-scripts start &",
     "e2e": "sleep 4 && protractor protractor.conf.js",
-    "poste2e": "pkill -f concourse-boarding-pass"
+    "post-e2e": "pkill -f concourse-boarding-pass"
   },
   "dependencies": {
     "blob": "^0.0.4",
