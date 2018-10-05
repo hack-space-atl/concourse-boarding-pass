@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Question.css'
 import {withRouter} from "react-router";
+import { Button } from "semantic-ui-react";
 
 class QuestionComponent extends Component {
     constructor(props) {
@@ -9,15 +10,19 @@ class QuestionComponent extends Component {
     render() {
         return (
             <div className="questionDiv">
-                <p>Have you installed Concourse yet?</p>
+
+                <div className="question">Have you installed Concourse yet?</div>
+
                 <div className="buttonContainer">
-                    <button className="buttons" onClick={() => {
+                    <Button primary className="button" onClick={() => {
                         this.props.history.push('/configure');
-                    }}>Yup!</button>
-                    <button className="buttons" onClick={() => {
+                    }}>Yes!</Button>
+                    <Button secondary className="button" onClick={() => {
                         this.props.history.push('/install');
-                    }}>Not yet...</button>
+                    }}>Not yet...</Button>
                 </div>
+
+
             </div>
         )
     }

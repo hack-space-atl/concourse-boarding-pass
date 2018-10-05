@@ -3,6 +3,7 @@
     justify-items: flex-start;
     margin-top: 1%;
     text-align: left;
+    align-items: center;
 }
 
 .text-label {
@@ -11,13 +12,8 @@
     text-align: start;
 }
 
-.dropdown {
-
-}
-
-.repoText {
-    padding-left: 2.5%;
-    width: 175px;
+.url {
+    width: 70%;
 }
 
 .final-text {
@@ -30,4 +26,8 @@
     color: #3398DC;
     font-weight: bold;
     margin-top: 10%;
+}
+
+.job {
+
 }

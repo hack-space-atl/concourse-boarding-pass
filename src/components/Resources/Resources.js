@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import './Resources.css';
 import update from 'immutability-helper';
-import { DropdownButton, MenuItem } from "react-bootstrap";
+import { Button, Container, Input, Select } from "semantic-ui-react";
 
 class Resources extends Component {
-
 
     constructor(props) {
         super(props);
@@ -15,8 +14,7 @@ class Resources extends Component {
             numJobs: 1
         };
 
-
-        this.resourceTypes = this.populateResourceTypes(
+        this.resourceTypes = this.createMenuItemCollection(
             'git', 'sh', 'hg', 'time', 's3', 'archive', 'semver', 'github-release', 'docker-image', 'tracker',
             'pool', 'cf', 'bosh-io-release', 'bosh-io-stemcell');
 
@@ -112,12 +110,13 @@ class Resources extends Component {
         this.resourceTypeSelect = this.resourceTypeSelect.bind(this);
     }
 
-    populateResourceTypes = (...names) => {
+    createMenuItemCollection = (...names) => {
         let data = [];
         for (let i = 0; i < names.length; i++) {
             data.push({
-                name: names[i],
-                value: i
+                key: i,
+                value: i,
+                text: names[i],
             });
         }
 
@@ -127,8 +126,6 @@ class Resources extends Component {
     frameworkSelect = (key) => {
         const item = key.item;
         const id = key.id;
-
-        console.log(`state.jobs: `, this.state.jobs);
 
         let resourceTemplate = this.pipeline_template[item.name];
         resourceTemplate.resources.source.uri = this.state.jobs[id].uri;
@@ -187,28 +184,61 @@ class Resources extends Component {
 
     render() {
 
+        // let resourceTypeOptions = [];
+        // resourceTypeOptions.push(
+        //     <div role={listbox}>
+        //
+        //     </div>
+        // );
+
 
         let resourceItems = [];
         for (let i = 0; i < this.state.numResources; i++) {
             resourceItems.push(
-                <div className={`resource`} key={i}>
+                <div className="resource card" key={i}>
                     <h4>{`Resource ${i + 1}`}</h4>
 
                     <div className="block">
                         <div className="text-label">Name:</div>
-                        <input className="resourceName" type="text"
-                               placeholder="resource-name" onChange={this.inputChange}>
-                        </input>
+
+                        <div className="ui left corner labeled input">
+                            <input type="text" id={`resourceName${i}`}
+                                   placeholder="resource-name" onChange={this.inputChange} />
+                            <div className="ui left corner label">
+                                <i className="asterisk icon"></i>
+                            </div>
+                        </div>
+
                     </div>
+
                     <div className="block">
                         <div className="text-label">Type:</div>
-                        <DropdownButton id="dropdown-type"
-                                        className="typeDropdown"
-                                        title="Choose a Type">
-                            {this.resourceTypes.map((item, index) =>
-                                <MenuItem className="menuItem" key={index} eventKey={{item: item, id: index}}
-                                          onSelect={this.resourceTypeSelect}>{item.name}</MenuItem>)}
-                        </DropdownButton>
+
+                        <div className="ui left corner labeled input">
+                            <Select id={`resourceType${i}`} options={this.resourceTypes}
+                                    placeholder='Choose a Type...'/>
+                            <div className="ui left corner label">
+                                <i className="asterisk icon"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/*TODO generated properties based on type*/}
+
+
+
+
+                    <div className="block">
+                        <div className="text-label">Repo URL</div>
+
+
+                        <div className="ui left corner labeled input">
+                            <input type="text" id={`jobUrl${i}`} className="url" placeholder="Repo URL" onChange={this.inputChange} />
+                            <div className="ui left corner label">
+                                <i className="asterisk icon"></i>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -218,50 +248,30 @@ class Resources extends Component {
         let jobItems = [];
         for (let i = 0; i < this.state.numJobs; i++) {
             jobItems.push(
-                <div className={`job`} key={i}>
+                <div className="job card" key={i}>
                     <h4>{`Job ${i + 1}`}</h4>
+
                     <div className="block">
-                        <div className="text-label">Repo URL</div>
-                        <input className="repoText" id={i} type="text"
-                               placeholder="Repo URL" onChange={this.inputChange}>
-                        </input>
+                        <div className="text-label">Name:</div>
+                        <Input id={`jobName${i}`}
+                               placeholder="resource-name" onChange={this.inputChange}>
+                        </Input>
                     </div>
 
                     <div className="block">
-                        <div className="text-label">Which branch?</div>
-                        <input className="branchText" id={i} type="text"
-                               placeholder="Branch" onChange={this.inputChange}>
-                        </input>
+                        <div className="text-label">Type:</div>
+                        <Select id={`jobAssignedResource${i}`}
+                                options={this.resources} placeholder='Choose a Resource...'/>
                     </div>
 
-                    <div className="block">
-                        <DropdownButton id="dropdown-framework"
-                                        key={i}
-                                        className="frameworkDropdown"
-                                        title="Choose a tech stack">
-                            {this.techArray.map((item, index) =>
-                                <MenuItem key={index} eventKey={{item: item, id: i}}
-                                          onSelect={this.frameworkSelect}>{item.name}</MenuItem>)}
-                        </DropdownButton>
-                    </div>
-
-                    <div className="block">
-                        <DropdownButton id="dropdown-task"
-                                        key={i}
-                                        className="taskDropdown"
-                                        title="Choose a Task">
-                            {this.taskArray.map((item, index) =>
-                                <MenuItem key={index} eventKey={{item: item, id: i}}
-                                          onSelect={this.frameworkSelect}>{item.name}</MenuItem>)}
-                        </DropdownButton>
-                    </div>
                 </div>
             )
         }
 
         return (
             <div className="jobs">
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                <link rel="stylesheet"
+                      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
                       crossOrigin="anonymous">
                 </link>
@@ -277,10 +287,10 @@ class Resources extends Component {
 
                         <br/>
 
-                        <button className="addResource" onClick={() => {
+                        <Button className="addResource" onClick={() => {
                             this.setState({numResources: this.state.numResources + 1});
                         }}>Add Resource
-                        </button>
+                        </Button>
                     </div>
                 </div>
 
@@ -295,13 +305,12 @@ class Resources extends Component {
 
                         <br/>
 
-                        <button onClick={() => {
+                        <Button onClick={() => {
                             this.setState({numJobs: this.state.numJobs + 1});
                         }}>Add Job
-                        </button>
+                        </Button>
                     </div>
                 </div>
-
             </div>
         );
     }

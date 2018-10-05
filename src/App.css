@@ -10,7 +10,7 @@
 
 .App-header {
   background-color: #3398DC;
-  height: 150px;
+  height: 180px;
   padding: 20px;
   color: white;
   text-align: center;
@@ -24,7 +24,7 @@
 .App-title {
   display: inline-block;
   font-size: 2.8em;
-  margin: 0px;
+  margin: 0;
   vertical-align: top;
 }
 

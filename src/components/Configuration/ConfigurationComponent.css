@@ -6,6 +6,10 @@
     flex: 1;
 }
 
+.section-left {
+    margin-right: 1%;
+}
+
 .configuration {
     padding: 3% 10%;
 }

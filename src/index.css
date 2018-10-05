@@ -1,27 +1,70 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .resources {
-  padding-left: 15%;
-  padding-right: 15%;
-  padding-top: 5%;
-  display: inline-flex;
-  flex-direction: column;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+    display: inline-flex;
+    flex-direction: column;
 }
 
 .section {
-  margin-bottom: 5%;
+    margin-bottom: 5%;
 }
 
 .section-header {
-  font-weight: bold;
-  font-size: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.back-icon-link {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.back-icon-link:hover {
+    color: #3398DC;
+    fill: #3398DC;
+}
+
+.back-icon {
+    margin-right: 1%;
+}
+
+.back-icon:hover {
+    fill: #3398DC;
+}
+
+.title {
+    margin-bottom: 3%;
+}
+
+.ui.left.corner.labeled.input > div.default.text {
+    padding-left: 1.4em!important;
+}
+
+div.item > span.text {
+    font-size: 14px;
+}
+
+button.ui.button {
+    font-size: 14px;
+}
+
+div.card {
+    border: 1px solid #3398DC;
+    padding: 3%;
+    border-radius: 10px;
+    margin: 1% 0 1%;
 }
 
 /*.banner {*/
-  /*background-color: #3398DC;*/
-  /*color: white;*/
+/*background-color: #3398DC;*/
+/*color: white;*/
 /*}*/

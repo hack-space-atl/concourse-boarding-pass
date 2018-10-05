@@ -37,32 +37,12 @@ describe('Concourse App', function () {
     fit('Successfully creates one or more resources', async () => {
         element(by.css('button:nth-child(1)')).click();
 
-        element(by.css('.resourceName')).sendKeys("my-git-repo");
-
+        element(by.css('.resourceName input')).sendKeys('my-resource');
         element(by.css('.typeDropdown')).click();
-        expect(element(by.cssContainingText('.menuItem', 'git')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'sh')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'hg')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'time')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 's3')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'archive')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'semver')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'github-release')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'docker-image')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'tracker')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'pool')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'cf')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'bosh-io-release')).isPresent()).toBe(true);
-        expect(element(by.cssContainingText('.menuItem', 'bosh-io-stemcell')).isPresent()).toBe(true);
-
-        element(by.cssContainingText('.menuItem', 'git')).click();
-
         element(by.css('button.addResource')).click();
 
-
         expect(element(by.cssContainingText('.resource', 'Resource 1')).isPresent()).toBe(true);
-
-        browser.sleep(5000);
+        expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(true);
     });
 
 });
