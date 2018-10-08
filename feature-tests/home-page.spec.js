@@ -37,12 +37,15 @@ describe('Concourse App', function () {
     fit('Successfully creates one or more resources', async () => {
         element(by.css('button:nth-child(1)')).click();
 
-        element(by.css('.resourceName input')).sendKeys('my-resource');
-        element(by.css('.typeDropdown')).click();
+        element(by.css('#resourceName0')).sendKeys('my-resource');
+        element(by.css('#resourceType0')).click();
         element(by.css('button.addResource')).click();
 
         expect(element(by.cssContainingText('.resource', 'Resource 1')).isPresent()).toBe(true);
         expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(true);
+
+        element(by.css('#jobAssignedResource0')).click();
+        expect(element(by.cssContainingText('#jobAssignedResource0 .item .text', 'my-resource')).isPresent()).toBe(true);
     });
 
 });
