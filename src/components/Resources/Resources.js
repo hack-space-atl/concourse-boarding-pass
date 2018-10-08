@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import './Resources.css';
 import update from 'immutability-helper';
-import { Button, Container, Input, Select } from "semantic-ui-react";
+import {Button, Container, Input, Select} from "semantic-ui-react";
 
 class Resources extends Component {
 
@@ -183,15 +183,6 @@ class Resources extends Component {
     }
 
     render() {
-
-        // let resourceTypeOptions = [];
-        // resourceTypeOptions.push(
-        //     <div role={listbox}>
-        //
-        //     </div>
-        // );
-
-
         let resourceItems = [];
         for (let i = 0; i < this.state.numResources; i++) {
             resourceItems.push(
@@ -201,44 +192,26 @@ class Resources extends Component {
                     <div className="block">
                         <div className="text-label">Name:</div>
 
-                        <div className="ui left corner labeled input">
-                            <input type="text" id={`resourceName${i}`}
-                                   placeholder="resource-name" onChange={this.inputChange} />
-                            <div className="ui left corner label">
-                                <i className="asterisk icon"></i>
-                            </div>
-                        </div>
+                        <Input type="text" id={`resourceName${i}`}
+                               placeholder="resource-name" onChange={this.inputChange}/>
 
                     </div>
 
                     <div className="block">
                         <div className="text-label">Type:</div>
 
-                        <div className="ui left corner labeled input">
-                            <Select id={`resourceType${i}`} options={this.resourceTypes}
-                                    placeholder='Choose a Type...'/>
-                            <div className="ui left corner label">
-                                <i className="asterisk icon"></i>
-                            </div>
-                        </div>
+                        <Select id={`resourceType${i}`} options={this.resourceTypes}
+                                placeholder='Choose a Type...'/>
 
                     </div>
 
                     {/*TODO generated properties based on type*/}
 
 
-
-
                     <div className="block">
                         <div className="text-label">Repo URL</div>
-
-
-                        <div className="ui left corner labeled input">
-                            <input type="text" id={`jobUrl${i}`} className="url" placeholder="Repo URL" onChange={this.inputChange} />
-                            <div className="ui left corner label">
-                                <i className="asterisk icon"></i>
-                            </div>
-                        </div>
+                        <Input type="text" id={`jobUrl${i}`} className="url" placeholder="Repo URL"
+                               defaultValue='https://github.com/' onChange={this.inputChange} />
                     </div>
 
                 </div>

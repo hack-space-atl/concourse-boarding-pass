@@ -45,9 +45,13 @@ body {
     margin-bottom: 3%;
 }
 
-.ui.left.corner.labeled.input > div.default.text {
-    padding-left: 1.4em!important;
-}
+/*.ui.left.corner.labeled.input > div.default.text {*/
+    /*padding-left: 1.4em!important;*/
+/*}*/
+
+/*div.labeled > div.ui.selection.dropdown {*/
+    /*padding-left: 18%;*/
+/*}*/
 
 div.item > span.text {
     font-size: 14px;

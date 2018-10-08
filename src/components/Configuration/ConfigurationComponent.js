@@ -51,7 +51,6 @@ class ConfigurationComponent extends Component {
             }
         };
         jsonData = this.yamlGen.createResource(moreData);
-        // console.log(jsonData);
         const step = {
             name: "some job name",
             public: true,
