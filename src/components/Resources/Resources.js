@@ -1,27 +1,25 @@
 import React, { Component } from "react";
 import './Resources.css';
 import update from 'immutability-helper';
-import { Button, Container, Input, Select } from "semantic-ui-react";
-import * as ReactDOM from "react-dom";
+import { Button, Form, Input, Label, Select } from "semantic-ui-react";
 
 class Resources extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            workingResource: {
-                name: '',
-                type: ''
-            },
-            jobs: [],
-            resources: [],
-            numResources: 1,
-            numJobs: 1
+            jobs: [{name: '', get: ''}],
+            resources: [{name: '', type: ''}
+            ],
+            resourceNames: []
         };
 
-        this.resourceTypes = this.createMenuItemCollection(
+        this.resourceTypes = [
             'git', 'sh', 'hg', 'time', 's3', 'archive', 'semver', 'github-release', 'docker-image', 'tracker',
-            'pool', 'cf', 'bosh-io-release', 'bosh-io-stemcell');
+            'pool', 'cf', 'bosh-io-release', 'bosh-io-stemcell'];
+
+        this.resourceTypesSelectItems = this.createMenuItemCollection(this.resourceTypes);
+
 
         this.techArray = [
             {
@@ -110,14 +108,17 @@ class Resources extends Component {
             },
         };
 
-        this.inputChange = this.inputChange.bind(this);
-        this.inputChangeResource = this.inputChangeResource.bind(this);
-        this.frameworkSelect = this.frameworkSelect.bind(this);
-        this.resourceTypeSelect = this.resourceTypeSelect.bind(this);
+        this.resourceSelect = this.resourceSelect.bind(this);
+        this.resourceInputChange = this.resourceInputChange.bind(this);
+        this.jobInputChange = this.jobInputChange.bind(this);
         this.addResource = this.addResource.bind(this);
+        this.addJob = this.addJob.bind(this);
+        this.removeResource = this.removeResource.bind(this);
+
+        this.frameworkSelect = this.frameworkSelect.bind(this);
     }
 
-    createMenuItemCollection = (...names) => {
+    createMenuItemCollection = (names) => {
         let data = [];
         for (let i = 0; i < names.length; i++) {
             data.push({
@@ -138,85 +139,70 @@ class Resources extends Component {
         resourceTemplate.resources.source.uri = this.state.jobs[id].uri;
         resourceTemplate.resources.source.branch = this.state.jobs[id].branch;
 
-        // const newResources = update(this.state.jobs, {
-        //     [id]: {$set: job}
-        // });
-        //
-        // this.setState({
-        //     jobs: newResources
-        // });
-
         console.log(`template: ${resourceTemplate}`)
     };
 
-    inputChangeResource(e) {
+    resourceInputChange(e) {
         let id = e.target.id;
-        let resource = this.state.workingResource || {};
+        let resource = this.state.resources[id] || {};
 
-        if (e.target.id.includes("resourceName")) {
-            resource.name = e.target.value
-        }
-        if (e.target.id.includes("resourceType")) {
-            resource.type = e.target.value
+        if (e.target.className.includes("resourceName")) {
+            resource.name = e.target.value;
         }
 
-        update(this.state.workingResource, {
+        const newResources = update(this.state.resources, {
             [id]: {$set: resource}
         });
 
         this.setState({
-            workingResource: resource
+            resources: newResources
         });
 
-        console.log('Update ====> ', this.state.workingResource);
+        this.updateResourceList();
+
+        console.log('Update ====> ', this.state.resources[id]);
     }
 
-    resourceTypeSelect = (e, data) => {
+    jobInputChange(e) {
         let id = e.target.id;
-        let resource = this.state.workingResource || {};
-        resource.type = data.options[data.value].text;
-
-        const workingResource = update(this.state.workingResource, {
-            [id]: {$set: resource}
-        });
-
-        this.setState({
-            workingResource: workingResource
-        });
-
-        console.log('data ====> ', data);
-        console.log('New Value ====> ', this.state.workingResource);
-    };
-
-    inputChange(e) {
-        let id = e.target.id;
-        console.log(`inputChange`);
-        console.log(`target.id = `, id);
-        console.log(`state = `, this.state);
-
         let job = this.state.jobs[id] || {};
 
-        if (e.target.className === "repoText") {
-            job.uri = e.target.value
-        }
-        if (e.target.className === "branchText") {
-            job.branch = e.target.value
+        if (e.target.className.includes("jobName")) {
+            job.name = e.target.value;
         }
 
-        const newResources = update(this.state.jobs, {
+        const newJobs = update(this.state.jobs, {
             [id]: {$set: job}
         });
 
         this.setState({
-            jobs: newResources
+            jobs: newJobs
         });
 
-        console.log(this.state.jobs);
+        console.log('Update ====> ', this.state.jobs[id]);
     }
 
-    addResource() {
+    updateResourceList() {
+        let names = [];
+        this.state.resources.filter(resource => resource.name !== '').forEach((resource) => {
+            names.push(resource.name)
+        });
+
+        this.setState({
+            resourceNames: this.createMenuItemCollection(names)
+        });
+    }
+
+    resourceSelect(e) {
+        let id = e.target.id;
+        let resource = this.state.resources[id] || {};
+
+        if (e.target.className.includes("resourceType")) {
+            resource.type = this.resourceTypesSelectItems[e.target.value].text;
+        }
+
         const newResources = update(this.state.resources, {
-            [this.state.resources.length]: {$set: this.state.workingResource}
+            [id]: {$set: resource}
         });
 
         this.setState({
@@ -224,60 +210,112 @@ class Resources extends Component {
         });
     };
 
+    addResource() {
+        let resource = {name: '', type: ''};
+        let resources = this.state.resources;
+
+        resources.push(resource);
+
+        this.setState({
+            resources: resources
+        });
+    }
+
+    addJob() {
+        let job = {name: '', get: ''};
+        let jobs = this.state.jobs;
+
+        jobs.push(job);
+
+        this.setState({
+            jobs: jobs
+        });
+    }
+
+    removeResource(index) {
+        let resources = this.state.resources;
+
+        resources.splice(index, 1);
+
+        this.setState({
+            resources: resources
+        });
+
+        this.updateResourceList();
+    }
+
     render() {
         let resourceItems = [];
-        for (let i = 0; i < this.state.resources.length + 1; i++) {
+        for (let i = 0; i < this.state.resources.length; i++) {
             resourceItems.push(
                 <div className="resource card" key={i}>
                     <h4>{`Resource ${i + 1}`}</h4>
 
-                    <div className="block">
-                        <div className="text-label">Name:</div>
+                    <Form size='huge'>
 
-                        <Input type="text" id={`resourceName${i}`} key={i}
-                               placeholder="resource-name" value={this.state.workingResource.name} onChange={this.inputChangeResource}/>
+                        <Form.Group>
+                            <Form.Field>
+                                <label>
+                                    Name
+                                    <Label className='req' horizontal color='red'>required</Label>
+                                </label>
+                                <input className='resourceName' id={i} placeholder='resource-name'
+                                       value={this.state.resources[i].name} onChange={this.resourceInputChange} />
+                            </Form.Field>
 
-                    </div>
+                            <Form.Field>
+                                <label>
+                                    Type
+                                    <Label className='req' horizontal color='red'>required</Label>
+                                </label>
+                                <Form.Select className="resourceType" id={i} placeholder='Choose a Type...'
+                                             options={this.resourceTypesSelectItems} onChange={this.resourceSelect}/>
+                            </Form.Field>
 
-                    <div className="block">
-                        <div className="text-label">Type:</div>
-
-                        <Select id={`resourceType${i}`} options={this.resourceTypes} key={i}
-                                placeholder='Choose a Type...' onChange={this.resourceTypeSelect}/>
-
-                    </div>
+                        </Form.Group>
+                    </Form>
 
                     {/*TODO generated properties based on type*/}
 
-                    <div className="block">
-                        <div className="text-label">Repo URL</div>
-                        <Input type="text" id={`jobUrl${i}`} className="url" key={i}
-                               placeholder="Repo URL" onChange={this.inputChangeResource}
-                               defaultValue='https://github.com/'/>
+                    <div className="delete-button block">
+                        <Button id={i} className="removeResource" onClick={() => {
+                            this.removeResource(i)
+                        }}>Delete
+                        </Button>
                     </div>
                 </div>
             )
         }
 
         let jobItems = [];
-        for (let i = 0; i < this.state.numJobs; i++) {
+        for (let i = 0; i < this.state.jobs.length; i++) {
             jobItems.push(
                 <div className="job card" key={i}>
                     <h4>{`Job ${i + 1}`}</h4>
 
-                    <div className="block">
-                        <div className="text-label">Name:</div>
-                        <Input id={`jobName${i}`}
-                               placeholder="resource-name" onChange={this.inputChange}>
-                        </Input>
-                    </div>
+                    <Form size='huge'>
 
-                    <div className="block" key={i}>
-                        <div className="text-label">Type:</div>
-                        <Select id={`jobAssignedResource${i}`} key={i}
-                                options={this.state.resources} placeholder='Choose a Resource...'/>
-                    </div>
+                        <Form.Group>
+                            <Form.Field>
+                                <label>
+                                    Name
+                                    <Label className='req' horizontal color='red'>required</Label>
+                                </label>
+                                <input className='jobName' id={i} placeholder='job-name'
+                                       value={this.state.jobs[i].name} onChange={this.jobInputChange} />
+                            </Form.Field>
 
+                            <Form.Field>
+                                <label>
+                                    Type
+                                    <Label className='req' horizontal color='red'>required</Label>
+                                </label>
+                                <Form.Select className="jobAssignedResource" id={i} placeholder='Choose a Type...'
+                                             options={this.state.resourceNames} />
+                            </Form.Field>
+
+                        </Form.Group>
+                    </Form>
                 </div>
             )
         }
@@ -319,8 +357,8 @@ class Resources extends Component {
 
                         <br/>
 
-                        <Button onClick={() => {
-                            this.setState({numJobs: this.state.numJobs + 1});
+                        <Button className="addJob" onClick={() => {
+                            this.addJob()
                         }}>Add Job
                         </Button>
                     </div>

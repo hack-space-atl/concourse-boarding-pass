@@ -45,14 +45,6 @@ body {
     margin-bottom: 3%;
 }
 
-/*.ui.left.corner.labeled.input > div.default.text {*/
-    /*padding-left: 1.4em!important;*/
-/*}*/
-
-/*div.labeled > div.ui.selection.dropdown {*/
-    /*padding-left: 18%;*/
-/*}*/
-
 div.item > span.text {
     font-size: 14px;
 }
@@ -61,14 +53,13 @@ button.ui.button {
     font-size: 14px;
 }
 
+div.ui.red.horizontal.label.req {
+    margin-left: 3%;
+}
+
 div.card {
     border: 1px solid #3398DC;
     padding: 3%;
     border-radius: 10px;
     margin: 1% 0 1%;
 }
-
-/*.banner {*/
-/*background-color: #3398DC;*/
-/*color: white;*/
-/*}*/

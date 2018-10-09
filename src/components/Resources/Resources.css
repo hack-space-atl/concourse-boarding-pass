@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.delete-button {
+    flex-direction: row-reverse;
+}
+
 .text-label {
     flex-basis: 125px;
     word-wrap: break-spaces;
@@ -13,7 +17,7 @@
 }
 
 .url {
-    width: 70%;
+    width: 73%;
 }
 
 .final-text {
