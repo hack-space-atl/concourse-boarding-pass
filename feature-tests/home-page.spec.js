@@ -58,7 +58,7 @@ describe('Configure Page', function () {
         expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(false);
     });
 
-    fit('Should successfully create one or more jobs', async () => {
+    it('Should successfully create one or more jobs', async () => {
         element(by.css('button:nth-child(1)')).click();
 
         element.all(by.css('input.resourceName')).get(0).sendKeys('my-resource');
@@ -71,17 +71,12 @@ describe('Configure Page', function () {
 
         element.all(by.css('.jobAssignedResource')).get(0).click();
         element.all(by.cssContainingText('.jobAssignedResource .item', 'my-resource')).get(0).click();
-        //
-        // element(by.css('button.addResource')).click();
-        //
-        // expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(true);
-        //
-        // element.all(by.css('input.resourceName')).get(1).sendKeys('my-resource-2');
-        // expect(element.all(by.css('input.resourceName')).get(1).getAttribute('value')).toEqual('my-resource-2');
-        //
-        // element.all(by.css('.resourceType')).get(1).click();
-        //
-        // element.all(by.css('button.removeResource')).get(1).click();
-        // expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(false);
+
+        element(by.css('button.addJob')).click();
+
+        expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(true);
+
+        element.all(by.css('button.removeJob')).get(1).click();
+        expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(false);
     });
 });

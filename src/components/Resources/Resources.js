@@ -114,6 +114,7 @@ class Resources extends Component {
         this.addResource = this.addResource.bind(this);
         this.addJob = this.addJob.bind(this);
         this.removeResource = this.removeResource.bind(this);
+        this.removeJob = this.removeJob.bind(this);
 
         this.frameworkSelect = this.frameworkSelect.bind(this);
     }
@@ -233,12 +234,20 @@ class Resources extends Component {
     }
 
     removeResource(index) {
-        let resources = this.state.resources;
-
-        resources.splice(index, 1);
+        let resources = this.state.resources.splice(index, 1);
 
         this.setState({
             resources: resources
+        });
+
+        this.updateResourceList();
+    }
+
+    removeJob(index) {
+        let jobs = this.state.jobs.splice(index, 1);
+
+        this.setState({
+            jobs: jobs
         });
 
         this.updateResourceList();
@@ -307,15 +316,23 @@ class Resources extends Component {
 
                             <Form.Field>
                                 <label>
-                                    Type
+                                    Resource
                                     <Label className='req' horizontal color='red'>required</Label>
                                 </label>
-                                <Form.Select className="jobAssignedResource" id={i} placeholder='Choose a Type...'
+                                <Form.Select className="jobAssignedResource" id={i} placeholder='Choose a Resource...'
                                              options={this.state.resourceNames} />
                             </Form.Field>
 
                         </Form.Group>
                     </Form>
+
+                    <div className="delete-button block">
+                        <Button id={i} className="removeJob" onClick={() => {
+                            this.removeJob(i)
+                        }}>Delete
+                        </Button>
+                    </div>
+
                 </div>
             )
         }
