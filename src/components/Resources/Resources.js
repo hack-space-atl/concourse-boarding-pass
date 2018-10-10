@@ -8,9 +8,8 @@ class Resources extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            jobs: [{name: '', get: ''}],
-            resources: [{name: '', type: ''}
-            ],
+            jobs: [{name: '', plan: []}],
+            resources: [{name: '', type: ''}],
             resourceNames: []
         };
 
@@ -18,7 +17,12 @@ class Resources extends Component {
             'git', 'sh', 'hg', 'time', 's3', 'archive', 'semver', 'github-release', 'docker-image', 'tracker',
             'pool', 'cf', 'bosh-io-release', 'bosh-io-stemcell'];
 
+        this.jobSteps = [
+            'Get', 'Put', 'Task', 'Aggregate', 'Do', 'Try', 'On Success', 'On Failure', 'On Abort', 'Ensure',
+            'Tags', 'Timeout', 'Attempts'];
+
         this.resourceTypesSelectItems = this.createMenuItemCollection(this.resourceTypes);
+        this.jobStepSelectItems = this.createMenuItemCollection(this.jobSteps);
 
 
         this.techArray = [
@@ -113,6 +117,7 @@ class Resources extends Component {
         this.jobInputChange = this.jobInputChange.bind(this);
         this.addResource = this.addResource.bind(this);
         this.addJob = this.addJob.bind(this);
+        this.addStep = this.addStep.bind(this);
         this.removeResource = this.removeResource.bind(this);
         this.removeJob = this.removeJob.bind(this);
 
@@ -194,13 +199,16 @@ class Resources extends Component {
         });
     }
 
-    resourceSelect(e) {
-        let id = e.target.id;
+    resourceSelect(e, data) {
+        let id = data.id;
         let resource = this.state.resources[id] || {};
 
-        if (e.target.className.includes("resourceType")) {
-            resource.type = this.resourceTypesSelectItems[e.target.value].text;
-        }
+        console.log('id => ', id);
+        console.log('className => ', e.target.className);
+        console.log('resource => ', resource);
+        console.log('data => ', data);
+
+        resource.type = data.options[data.value].text;
 
         const newResources = update(this.state.resources, {
             [id]: {$set: resource}
@@ -209,7 +217,30 @@ class Resources extends Component {
         this.setState({
             resources: newResources
         });
-    };
+
+        console.log('resource => ', this.state.resources[id]);
+    }
+
+    addStep(e, data) {
+        let id = data.id;
+        let job = this.state.jobs[id];
+
+        let step = data.options[data.value].text;
+
+        job.plan.push({
+            name: [step.toLowerCase()]
+        });
+
+        const newJobs = update(this.state.jobs, {
+            [id]: {$set: job}
+        });
+
+        this.setState({
+            jobs: newJobs
+        });
+
+        console.log('job => ', this.state.jobs[id]);
+    }
 
     addResource() {
         let resource = {name: '', type: ''};
@@ -223,7 +254,7 @@ class Resources extends Component {
     }
 
     addJob() {
-        let job = {name: '', get: ''};
+        let job = {name: '', plan: []};
         let jobs = this.state.jobs;
 
         jobs.push(job);
@@ -257,6 +288,20 @@ class Resources extends Component {
         this.updateResourceList();
     }
 
+    renderJobPlan(index) {
+        let stepItems = [];
+        for (let i = 0; i < this.state.jobs[index].plan.length; i++) {
+            let plan = this.state.jobs[index].plan[i];
+            stepItems.push(
+                <div className='jobStep' key={i}>
+                    <h1>{`${plan.name}`}</h1>
+                </div>
+            );
+        }
+
+        return stepItems;
+    }
+
     render() {
         let resourceItems = [];
         for (let i = 0; i < this.state.resources.length; i++) {
@@ -267,20 +312,14 @@ class Resources extends Component {
                     <Form size='huge'>
 
                         <Form.Group>
-                            <Form.Field>
-                                <label>
-                                    Name
-                                    <Label className='req' horizontal color='red'>required</Label>
-                                </label>
+                            <Form.Field required>
+                                <label>Name</label>
                                 <input className='resourceName' id={i} placeholder='resource-name'
                                        value={this.state.resources[i].name} onChange={this.resourceInputChange}/>
                             </Form.Field>
 
-                            <Form.Field>
-                                <label>
-                                    Type
-                                    <Label className='req' horizontal color='red'>required</Label>
-                                </label>
+                            <Form.Field required>
+                                <label>Type</label>
                                 <Form.Select className="resourceType" id={i} placeholder='Choose a Type...'
                                              options={this.resourceTypesSelectItems} onChange={this.resourceSelect}/>
                             </Form.Field>
@@ -310,25 +349,20 @@ class Resources extends Component {
 
                         <Form.Group>
                             <Form.Field>
-                                <label>
-                                    Name
-                                    <Label className='req' horizontal color='red'>required</Label>
-                                </label>
+                                <label>Name</label>
                                 <input className='jobName' id={i} placeholder='job-name'
                                        value={this.state.jobs[i].name} onChange={this.jobInputChange}/>
                             </Form.Field>
 
-                            <Form.Field>
-                                <label>
-                                    Resource
-                                    <Label className='req' horizontal color='red'>required</Label>
-                                </label>
-                                <Form.Select className="jobAssignedResource" id={i} placeholder='Choose a Resource...'
-                                             options={this.state.resourceNames}/>
+                            <Form.Field inline>
+                                <label>Steps</label>
+                                <Form.Select className="jobSteps" id={i} placeholder='Add one or more Steps...'
+                                             options={this.jobStepSelectItems} onChange={this.addStep}/>
                             </Form.Field>
-
                         </Form.Group>
                     </Form>
+
+                    {this.renderJobPlan(i)}
 
                     <div className="delete-button block">
                         <Button id={i} className="removeJob" onClick={() => {

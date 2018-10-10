@@ -32,10 +32,12 @@ describe('Concourse App', function () {
     });
 });
 
-describe('Configure Page', function () {
-    it('Should successfully create one or more resources', async () => {
+fdescribe('Configure Page', function () {
+    beforeEach(() => {
         element(by.css('button:nth-child(1)')).click();
+    });
 
+    it('Should successfully create one or more resources', async () => {
         expect(element(by.cssContainingText('.resource', 'Resource 1')).isPresent()).toBe(true);
 
         element.all(by.css('input.resourceName')).get(0).sendKeys('my-resource');
@@ -59,8 +61,6 @@ describe('Configure Page', function () {
     });
 
     it('Should successfully create one or more jobs', async () => {
-        element(by.css('button:nth-child(1)')).click();
-
         element.all(by.css('input.resourceName')).get(0).sendKeys('my-resource');
 
         expect(element(by.cssContainingText('.job', 'Job 1')).isPresent()).toBe(true);
@@ -69,14 +69,25 @@ describe('Configure Page', function () {
 
         expect(element.all(by.css('input.jobName')).get(0).getAttribute('value')).toEqual('my-job');
 
-        element.all(by.css('.jobAssignedResource')).get(0).click();
-        element.all(by.cssContainingText('.jobAssignedResource .item', 'my-resource')).get(0).click();
-
         element(by.css('button.addJob')).click();
 
         expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(true);
 
         element.all(by.css('button.removeJob')).get(1).click();
         expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(false);
+    });
+
+    it('Should successfully create a GET step', async ()=> {
+        element.all(by.css('.jobSteps')).get(0).click();
+        element.all(by.cssContainingText('.jobSteps .item', 'Get')).get(0).click();
+
+        expect(element(by.cssContainingText('.jobStep', 'get')).isPresent()).toBe(true);
+
+
+
+
+        //todo use this when testing the get step
+        // element.all(by.css('.jobSteps')).get(0).click();
+        // element.all(by.cssContainingText('.jobSteps .item', 'my-resource')).get(0).click();
     });
 });
