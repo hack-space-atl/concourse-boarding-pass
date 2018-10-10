@@ -234,7 +234,9 @@ class Resources extends Component {
     }
 
     removeResource(index) {
-        let resources = this.state.resources.splice(index, 1);
+        let resources = this.state.resources;
+
+        resources.splice(index, 1);
 
         this.setState({
             resources: resources
@@ -244,7 +246,9 @@ class Resources extends Component {
     }
 
     removeJob(index) {
-        let jobs = this.state.jobs.splice(index, 1);
+        let jobs = this.state.jobs;
+
+        jobs.splice(index, 1);
 
         this.setState({
             jobs: jobs
@@ -269,7 +273,7 @@ class Resources extends Component {
                                     <Label className='req' horizontal color='red'>required</Label>
                                 </label>
                                 <input className='resourceName' id={i} placeholder='resource-name'
-                                       value={this.state.resources[i].name} onChange={this.resourceInputChange} />
+                                       value={this.state.resources[i].name} onChange={this.resourceInputChange}/>
                             </Form.Field>
 
                             <Form.Field>
@@ -311,7 +315,7 @@ class Resources extends Component {
                                     <Label className='req' horizontal color='red'>required</Label>
                                 </label>
                                 <input className='jobName' id={i} placeholder='job-name'
-                                       value={this.state.jobs[i].name} onChange={this.jobInputChange} />
+                                       value={this.state.jobs[i].name} onChange={this.jobInputChange}/>
                             </Form.Field>
 
                             <Form.Field>
@@ -320,7 +324,7 @@ class Resources extends Component {
                                     <Label className='req' horizontal color='red'>required</Label>
                                 </label>
                                 <Form.Select className="jobAssignedResource" id={i} placeholder='Choose a Resource...'
-                                             options={this.state.resourceNames} />
+                                             options={this.state.resourceNames}/>
                             </Form.Field>
 
                         </Form.Group>
