@@ -1,93 +1,106 @@
-beforeEach(() => {
-    browser.ignoreSynchronization = true;
+let utils;
 
-    browser.get('/');
-});
-
-describe('Concourse App', function () {
-    it('Should successfully display the home page', async () => {
-        const title = element(by.css('h1.App-title'));
-
-        expect(title.getText()).toEqual('Concourse Boarding Pass');
+describe('App', () => {
+    beforeAll(() => {
+        utils = require('./util/utils');
     });
 
-    it('Should redirect users to the set up page', async () => {
-        element(by.css('button:first-child')).click();
-
-        expect(element(by.css('h2')).getText()).toEqual('Configuration');
-    });
-
-    it('Should redirect users to the installation page', async () => {
-        element(by.css('button:nth-child(2)')).click();
-
-        expect(element(by.css('.install')).getText()).toContain('Need help installing Concourse?');
-    });
-
-    it('Should redirect users to the set up page from the installation page', async () => {
-        element(by.css('button:nth-child(2)')).click();
-
-        element(by.css('.installed-concourse')).click();
-
-        expect(element(by.css('h2')).getText()).toEqual('Configuration');
-    });
-});
-
-fdescribe('Configure Page', function () {
     beforeEach(() => {
-        element(by.css('button:nth-child(1)')).click();
+        browser.ignoreSynchronization = true;
+        browser.get('/');
     });
 
-    it('Should successfully create one or more resources', async () => {
-        expect(element(by.cssContainingText('.resource', 'Resource 1')).isPresent()).toBe(true);
+    describe('Home Page', () => {
+        it('Should successfully display the home page', async () => {
+            const title = element(by.css('h1.App-title'));
+            utils.shouldEqualText(title, 'Concourse Boarding Pass');
+        });
 
-        element.all(by.css('input.resourceName')).get(0).sendKeys('my-resource');
+        it('Should redirect users to the set up page when they indicate they have already installed Concourse', async () => {
+            utils.navigateToConfigurePage();
 
-        expect(element.all(by.css('input.resourceName')).get(0).getAttribute('value')).toEqual('my-resource');
+            let configurePage = element(by.css('.configuration'));
+            utils.shouldContainText(configurePage, 'Configuration');
+        });
 
-        element.all(by.css('.resourceType')).get(0).click();
-        element.all(by.cssContainingText('.resourceType .item', 'sh')).get(0).click();
+        it('Should redirect users to the installation page when they indicate they have not installed Concourse', async () => {
+            utils.navigateToInstallPage();
 
-        element(by.css('button.addResource')).click();
+            let installPage = element(by.css('.install'));
+            utils.shouldContainText(installPage, 'Need help installing Concourse?');
+        });
 
-        expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(true);
+        it('Should redirect users to the set up page from the installation page after they indicate Concourse has been installed', async () => {
+            utils.navigateToInstallPage();
 
-        element.all(by.css('input.resourceName')).get(1).sendKeys('my-resource-2');
-        expect(element.all(by.css('input.resourceName')).get(1).getAttribute('value')).toEqual('my-resource-2');
+            let concourseInstalledButton = element(by.css('.installed-concourse'));
+            concourseInstalledButton.click();
 
-        element.all(by.css('.resourceType')).get(1).click();
-
-        element.all(by.css('button.removeResource')).get(1).click();
-        expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(false);
+            let configurePage = element(by.css('.configuration'));
+            utils.shouldContainText(configurePage, 'Configuration');
+        });
     });
 
-    it('Should successfully create one or more jobs', async () => {
-        element.all(by.css('input.resourceName')).get(0).sendKeys('my-resource');
+    describe('Configure Page', () => {
+        beforeEach(() => {
+            utils.navigateToConfigurePage();
+        });
 
-        expect(element(by.cssContainingText('.job', 'Job 1')).isPresent()).toBe(true);
+        fit('Should successfully create one or more resources', async () => {
+            utils.shouldContainText(element(by.css('.resource')), 'Resource 1');
 
-        element.all(by.css('input.jobName')).get(0).sendKeys('my-job');
+            let resourceName = element.all(by.css('input.resourceName')).get(0);
+            utils.inputText(resourceName, 'my-resource');
 
-        expect(element.all(by.css('input.jobName')).get(0).getAttribute('value')).toEqual('my-job');
+            utils.shouldEqualInputValue(resourceName, 'my-resource');
 
-        element(by.css('button.addJob')).click();
+            let resourceType = element.all(by.css('.resourceType')).get(0);
+            resourceType.click();
 
-        expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(true);
+            utils.getSelectOption('.resourceType', 0, 's3').click();
 
-        element.all(by.css('button.removeJob')).get(1).click();
-        expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(false);
-    });
+            let addResourceButton = element(by.css('button.addResource'));
+            addResourceButton.click();
 
-    it('Should successfully create a GET step', async ()=> {
-        element.all(by.css('.jobSteps')).get(0).click();
-        element.all(by.cssContainingText('.jobSteps .item', 'Get')).get(0).click();
+            expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(true);
 
-        expect(element(by.cssContainingText('.jobStep', 'get')).isPresent()).toBe(true);
+            element.all(by.css('input.resourceName')).get(1).sendKeys('my-resource-2');
+            expect(element.all(by.css('input.resourceName')).get(1).getAttribute('value')).toEqual('my-resource-2');
 
+            element.all(by.css('.resourceType')).get(1).click();
 
+            element.all(by.css('button.removeResource')).get(1).click();
+            expect(element(by.cssContainingText('.resource', 'Resource 2')).isPresent()).toBe(false);
+        });
 
+        it('Should successfully create one or more jobs', async () => {
+            element.all(by.css('input.resourceName')).get(0).sendKeys('my-resource');
 
-        //todo use this when testing the get step
-        // element.all(by.css('.jobSteps')).get(0).click();
-        // element.all(by.cssContainingText('.jobSteps .item', 'my-resource')).get(0).click();
+            expect(element(by.cssContainingText('.job', 'Job 1')).isPresent()).toBe(true);
+
+            element.all(by.css('input.jobName')).get(0).sendKeys('my-job');
+
+            expect(element.all(by.css('input.jobName')).get(0).getAttribute('value')).toEqual('my-job');
+
+            element(by.css('button.addJob')).click();
+
+            expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(true);
+
+            element.all(by.css('button.removeJob')).get(1).click();
+            expect(element(by.cssContainingText('.job', 'Job 2')).isPresent()).toBe(false);
+        });
+
+        it('Should successfully create a GET step', async () => {
+            element.all(by.css('.jobSteps')).get(0).click();
+            element.all(by.cssContainingText('.jobSteps .item', 'Get')).get(0).click();
+
+            expect(element(by.cssContainingText('.jobStep', 'get')).isPresent()).toBe(true);
+
+            //todo use this when testing the get step
+            //element.all(by.css('.getStep')).get(0).click();
+            // element.all(by.cssContainingText('.jobSteps .item', 'my-resource')).get(0).click();
+        });
     });
 });
+
+

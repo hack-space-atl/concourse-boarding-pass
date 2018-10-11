@@ -14,7 +14,7 @@ class Resources extends Component {
         };
 
         this.resourceTypes = [
-            'git', 'sh', 'hg', 'time', 's3', 'archive', 'semver', 'github-release', 'docker-image', 'tracker',
+            'git', 'hg', 'time', 's3', 'archive', 'semver', 'github-release', 'docker-image', 'tracker',
             'pool', 'cf', 'bosh-io-release', 'bosh-io-stemcell'];
 
         this.jobSteps = [
@@ -291,10 +291,14 @@ class Resources extends Component {
     renderJobPlan(index) {
         let stepItems = [];
         for (let i = 0; i < this.state.jobs[index].plan.length; i++) {
-            let plan = this.state.jobs[index].plan[i];
+            let step = this.state.jobs[index].plan[i];
             stepItems.push(
                 <div className='jobStep' key={i}>
-                    <h1>{`${plan.name}`}</h1>
+                    <h4>{`${step.name} Step`}</h4>
+                    <Form.Group>
+                        <Form.Field className='step' label={'w'}>
+                        </Form.Field>
+                    </Form.Group>
                 </div>
             );
         }
